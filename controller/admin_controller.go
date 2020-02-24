@@ -3,6 +3,7 @@ package controller
 import (
 	"CmsProject/model"
 	"CmsProject/service"
+	"CmsProject/utils"
 	"encoding/json"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
@@ -47,7 +48,7 @@ func (ac *AdminController) GetSingout() mvc.Result  {
 	return mvc.Response{
 		Object: map[string]interface{}{
 			"status":  utils.RECODE_OK,
-			"success": utils.Recode2Text(utils.RESPMSG_SIGNOUT)，
+			"success": utils.Recode2Text(utils.RESPMSG_SIGNOUT),
 		},
 	}
 }
@@ -84,6 +85,7 @@ func (ac *AdminController) GetCount() mvc.Result {
  * 请求url：/admin/info
  */
 func (ac *AdminController) GetInfo() mvc.Result  {
+
 	//从session中获取信息
 	userByte := ac.Session.Get(ADMIN)
 
@@ -93,7 +95,7 @@ func (ac *AdminController) GetInfo() mvc.Result  {
 			Object: map[string]interface{} {
 				"status":  utils.RECODE_UNLOGIN,
 				"type":    utils.EEROR_UNLOGIN,
-				"message": utils.Recode2Text(utils.ERROR_UNLOGIN),
+				"message": utils.Recode2Text(utils.EEROR_UNLOGIN),
 			},
 		}
 	}
@@ -107,8 +109,8 @@ func (ac *AdminController) GetInfo() mvc.Result  {
 		return mvc.Response{
 			Object: map[string]interface{}{
 				"status":  utils.RECODE_UNLOGIN,
-				"type":    utils.ERROR_UNLOGIN,
-				"message": utils.Recode2Text(utils.ERROR_UNLOGIN),
+				"type":    utils.EEROR_UNLOGIN,
+				"message": utils.Recode2Text(utils.EEROR_UNLOGIN),
 			},
 		}
 	}
